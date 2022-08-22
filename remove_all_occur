@@ -1,0 +1,90 @@
+
+package doubly;
+import java.util.*;
+public class remove_all_occ {
+Node head;
+class Node{
+	int data;
+	Node prev;
+	Node next;
+	Node(int d){
+		data=d;
+		prev=null;
+		next=null;
+		
+	}
+	
+}
+void push(int data) {
+	Node newnode=new Node(data);
+	newnode.prev=null;
+	newnode.next=head;
+	if(head!=null) {
+		head.prev=newnode;
+	}
+	
+	head=newnode;
+	
+}
+Node delete(Node del) {
+	if(head==del) {
+		head=head.next;
+	}
+	if(del.next!=null) {
+		del.next.prev=del.prev;
+	}
+	if(del.prev!=null) {
+		del.prev.next=del.next;
+	}
+	del=null;
+	return del;
+	
+}
+
+Node delall(int data) {
+	if(head==null) {
+		return null;
+	}
+	Node current=head;
+	Node next;
+	while(current!=null) {
+		if(current.data==data) {
+			Node n=current.next;
+			Node h=delete(current);
+			current=n;
+		}
+		else {
+			current=current.next;
+		}
+	}
+	return head;
+}
+
+void printlist(Node head) {
+	Node temp=head;
+	while(temp!=null) {
+		System.out.print(temp.data+"->");
+		temp=temp.next;
+	}
+	System.out.print("NULL \n");
+}
+
+
+public static void main(String args[]) {
+	remove_all_occ d=new remove_all_occ();
+	d.push(2);
+	d.push(3);
+	d.push(5);
+	d.push(4);
+	d.push(5);
+	d.push(6);
+	d.push(7);
+	d.push(5);
+	d.push(8);
+	d.printlist(d.head);
+	d.delall(5);
+	d.printlist(d.head);
+	
+}
+
+}
